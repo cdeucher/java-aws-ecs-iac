@@ -16,4 +16,4 @@
 
 ## Links
 - https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/setup-project-maven.html
-- https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/ecs/src/main/java/com/example/ecs# java-aws-ecs-app-iac
+- https://github.com/awsdocs/aws-docAlthoff#358-sdk-examples/tree/main/javav2/example_code/ecs/src/main/java/com/example/ecs# java-aws-ecs-app-iac
