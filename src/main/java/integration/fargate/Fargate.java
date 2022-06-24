@@ -1,13 +1,12 @@
-package integration.ecs;
+package integration.fargate;
 
+import integration.core.ClusterLocal;
+import integration.core.ServicesLocal;
+import integration.core.TasksLocal;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ecs.EcsClient;
-import software.amazon.awssdk.services.ecs.model.RunTaskResponse;
-import software.amazon.awssdk.services.ecs.model.Task;
 
-import java.util.List;
-
-public class Ecs {
+public class Fargate {
 
     public static void main(String[] args) {
         String clusterName = "cluster-react";
@@ -40,13 +39,16 @@ public class Ecs {
             definitionRegisterArn = task.getTaskDefinitions().get(0);
         }
 
-        ServicesLocal.CreateNewService(ecsClient,
-            clusterArn,
+        ServicesLocal service = new ServicesLocal(clusterArn,
             serviceName,
             securityGroup,
             subNets,
-            definitionRegisterArn
-        );
+            definitionRegisterArn);
+
+        if( service.getService(ecsClient).size() < 0 )
+            service.CreateNewService(ecsClient);
+
+        task.createTask(clusterName, definitionRegisterArn,securityGroup,subNets);
 
         ecsClient.close();
     }

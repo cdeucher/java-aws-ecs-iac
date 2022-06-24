@@ -1,5 +1,6 @@
-package integration.ecs;
+package integration.core;
 
+import software.amazon.awscdk.services.ecs.CapacityProviderStrategy;
 import software.amazon.awssdk.services.ecs.EcsClient;
 import software.amazon.awssdk.services.ecs.model.*;
 
@@ -97,8 +98,8 @@ public class TasksLocal {
 
         RunTaskRequest runTask = RunTaskRequest.builder()
             .cluster(clusterName)
+            .launchType("FARGATE")
             .taskDefinition(taskDefinition)
-            //.capacityProviderStrategy(capacityProviderItem)
             .networkConfiguration(vpcConfiguration)
             .count(1)
             .build();
